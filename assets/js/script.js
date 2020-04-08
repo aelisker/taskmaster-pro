@@ -180,15 +180,21 @@ $(".card .list-group").sortable({
   tolerance: "pointer",
   helper: "clone",
   activate: function(event) {
+    $(this).addClass("dropover");
+    $(".bottom-trash").addClass("bottom-trash-drag");
     console.log("activate", this);
   },
   deactivate: function(event) {
+    $(this).removeClass("dropover");
+    $(".bottom-trash").removeClass("bottom-trash-drag");
     console.log("deactivate", this);
   },
   over: function(event) {
+    $(event.target).addClass("dropover-active");
     console.log("over", event.target);
   },
   out: function(event) {
+    $(event.target).removeClass("dropover-active");
     console.log("out", event.target);
   },
   update: function(event) {
@@ -229,12 +235,15 @@ $("#trash").droppable({
   tolerance: "touch",
   drop: function(event, ui) {
     console.log("drop");
+    $(".bottom-trash").removeClass("bottom-trash-active");
     ui.draggable.remove();
   },
   over: function(event, ui) {
+    $(".bottom-trash").addClass("bottom-trash-active");
     console.log("over");
   },
   out: function(event, ui) {
+    $(".bottom-trash").removeClass("bottom-trash-active");
     console.log("out");
   }
 });
